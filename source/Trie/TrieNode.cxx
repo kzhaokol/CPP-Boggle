@@ -6,6 +6,7 @@
  * Description:   Header file for a Trie Node                                 *
  *****************************************************************************/
 #include "../Memory/SmartPointerUtility.h"
+
 #include "TrieNode.h"
 
 TrieNode::TrieNode() :
@@ -32,27 +33,25 @@ void TrieNode::setEndOfWord(const bool _isEndOfWord) {
 }
 
 bool TrieNode::hasNextLetters() const {
-    return !nextTrieNodeMap_.empty();
+    return !nextTrieNodePointerMap_.empty();
 }
 
 bool TrieNode::hasNextLetter(const char _letter) const {
-    return !(nextTrieNodeMap_.find(_letter) == nextTrieNodeMap_.end());
+    return !(nextTrieNodePointerMap_.find(_letter)
+            == nextTrieNodePointerMap_.end());
 
 }
 
 void TrieNode::addNextLetter(const char _letter, const char _isEndOfWord) {
-    nextTrieNodeMap_.emplace(_letter,
+    nextTrieNodePointerMap_.emplace(_letter,
             std::make_unique<TrieNode>(_letter, _isEndOfWord));
     return;
 }
 
 TrieNode * const TrieNode::getNextNodePointer(const char _letter) const {
-    auto selectedTrieNodeItr = nextTrieNodeMap_.find(_letter);
-    //std::cout << "GET NEXT NODE: " << (selectedTrieNode->second)->getLetter()
-    //        << std::endl;
-    if (selectedTrieNodeItr != nextTrieNodeMap_.end()) {
+    auto selectedTrieNodeItr = nextTrieNodePointerMap_.find(_letter);
+    if (selectedTrieNodeItr != nextTrieNodePointerMap_.end()) {
         return (selectedTrieNodeItr->second).get();
     }
-    //std::cout << "HERE" << std::endl;
     return nullptr;
 }

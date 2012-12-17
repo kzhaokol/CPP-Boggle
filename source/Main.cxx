@@ -87,7 +87,15 @@ int main(int _argCount, char** _argVector) {
 
     Trie mainTrie;
     mainTrie.insertWord("blah");
-    mainTrie.hasWord("blah");
+    mainTrie.insertWord("bla");
+    std::cout << mainTrie.hasWord("blah") << std::endl;
+    std::cout << mainTrie.hasWord("blahst") << std::endl;
+    mainTrie.insertWord("blahs");
+    std::cout << mainTrie.hasWord("blahs") << std::endl;
+    std::cout << mainTrie.hasWord("bla") << std::endl;
+    std::cout << mainTrie.hasWord("bl") << std::endl;
+
+
 
     return 0;
 }

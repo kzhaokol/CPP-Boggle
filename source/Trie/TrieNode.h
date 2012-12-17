@@ -14,7 +14,7 @@
 class TrieNode {
     public:
         typedef std::unique_ptr<TrieNode> UniquePointer;
-        typedef std::unordered_map<char, const TrieNode::UniquePointer> KeyNodePointerMap;
+        typedef std::unordered_map<char, TrieNode::UniquePointer> NextPointerMap;
 
         TrieNode();
         TrieNode(const char _letter, const bool _isEndOfWord);
@@ -33,7 +33,7 @@ class TrieNode {
     private:
         char letter_;
         bool isEndOfWord_;
-        TrieNode::KeyNodePointerMap nextTrieNodeMap_;
+        TrieNode::NextPointerMap nextTrieNodePointerMap_;
 };
 
 #endif /* __TRIE_NODE_H__ */

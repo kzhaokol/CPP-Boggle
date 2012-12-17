@@ -8,7 +8,6 @@
  *****************************************************************************/
 #include <iostream>
 
-#include "../Memory/SmartPointerUtility.h"
 #include "Trie.h"
 
 Trie::Trie() :
@@ -17,32 +16,25 @@ Trie::Trie() :
 }
 
 void Trie::insertWord(const std::string & _word) {
-    TrieNode & currentTrieNode(root_);
-    for (std::string::const_iterator charIterator = _word.begin();
-            charIterator < _word.end(); charIterator++) {
-        currentTrieNode.addNextLetter(*charIterator, false);
-        currentTrieNode = *(currentTrieNode.getNextNodePointer(*charIterator));
-
+    TrieNode * currentTrieNodePointer(&root_);
+    for (const char & letter : _word) {
+        currentTrieNodePointer->addNextLetter(letter, false);
+        currentTrieNodePointer = currentTrieNodePointer->getNextNodePointer(
+                letter);
     }
-    currentTrieNode.setEndOfWord(true);
+    currentTrieNodePointer->setEndOfWord(true);
     return;
 }
 
 bool Trie::hasWord(const std::string & _word) {
-    TrieNode & currentTrieNode(root_);
+    TrieNode * currentTrieNodePointer(&root_);
 
-    for (std::string::const_iterator charIterator = _word.begin();
-            charIterator < _word.end(); charIterator++) {
-        currentTrieNode = *(currentTrieNode.getNextNodePointer(*charIterator));
-        std::cout << "Has Word " << (*charIterator) << std::endl;
-        std::cout << currentTrieNode.getLetter() << std::endl;
-        if ((currentTrieNode.getLetter() == '\0')
-                && (currentTrieNode.isEndOfWord())) {
+    for (const char & letter : _word) {
+        currentTrieNodePointer = currentTrieNodePointer->getNextNodePointer(
+                letter);
+        if (currentTrieNodePointer == nullptr) {
             return false;
         }
     }
-    if (currentTrieNode.isEndOfWord()) {
-        return true;
-    }
-    return false;
+    return currentTrieNodePointer->isEndOfWord();
 }
