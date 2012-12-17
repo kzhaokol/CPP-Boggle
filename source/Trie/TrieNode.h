@@ -11,11 +11,10 @@
 #include <memory>
 #include <unordered_map>
 
-
 class TrieNode {
     public:
         typedef std::unique_ptr<TrieNode> UniquePointer;
-        typedef std::unordered_map<char, TrieNode::UniquePointer> LetterKeyMap;
+        typedef std::unordered_map<char, const TrieNode::UniquePointer> KeyNodePointerMap;
 
         TrieNode();
         TrieNode(const char _letter, const bool _isEndOfWord);
@@ -27,14 +26,14 @@ class TrieNode {
 
         bool hasNextLetters() const;
         bool hasNextLetter(const char _letter) const;
-        void addNextLetter(const char _letter);
+        void addNextLetter(const char _letter, const char _isEndOfWord);
 
-        TrieNode & getNextNode(const char _letter) const;
+        TrieNode * const getNextNodePointer(const char _letter) const;
 
     private:
         char letter_;
         bool isEndOfWord_;
-        TrieNode::LetterKeyMap nextTrieNodeMap_;
+        TrieNode::KeyNodePointerMap nextTrieNodeMap_;
 };
 
 #endif /* __TRIE_NODE_H__ */

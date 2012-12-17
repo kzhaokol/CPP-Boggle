@@ -3,7 +3,7 @@
 # Author:        Kevin Zhao (kzhao)                                           #
 # Date:          July 5, 2012                                                 #
 # Filename:      Makefile                                                     #
-# Description:   Makefile for creating Boggle executable                      #
+# Description:   Makefile for creating Boggle solver executable               #
 ###############################################################################
 CXX = g++ -std=c++11
 CXX_FLAGS = -Wall -Werror

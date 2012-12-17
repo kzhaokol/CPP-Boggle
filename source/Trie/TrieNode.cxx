@@ -5,13 +5,12 @@
  * Filename:      TrieNode.cxx                                                *
  * Description:   Header file for a Trie Node                                 *
  *****************************************************************************/
+#include "../Memory/SmartPointerUtility.h"
 #include "TrieNode.h"
-
-
 
 TrieNode::TrieNode() :
                 letter_('\0'),
-                isEndOfWord_(true) {
+                isEndOfWord_(false) {
 }
 
 TrieNode::TrieNode(const char _letter, const bool _isEndOfWord) :
@@ -29,6 +28,7 @@ bool TrieNode::isEndOfWord() const {
 
 void TrieNode::setEndOfWord(const bool _isEndOfWord) {
     isEndOfWord_ = _isEndOfWord;
+    return;
 }
 
 bool TrieNode::hasNextLetters() const {
@@ -36,29 +36,23 @@ bool TrieNode::hasNextLetters() const {
 }
 
 bool TrieNode::hasNextLetter(const char _letter) const {
-    if (nextTrieNodeMap_.find(_letter) == nextTrieNodeMap_.end()) {
-        return false;
-    }
-    return true;
+    return !(nextTrieNodeMap_.find(_letter) == nextTrieNodeMap_.end());
+
 }
 
-/**
-void TrieNode::addNextLetter(const char _letter) {
-    nextTrieNodeMap_.insert(
-            std::make_pair<char, TrieNode::UniquePointer>(_letter,
-                    std::make_shared<TrieNode>(_letter, false)));
+void TrieNode::addNextLetter(const char _letter, const char _isEndOfWord) {
+    nextTrieNodeMap_.emplace(_letter,
+            std::make_unique<TrieNode>(_letter, _isEndOfWord));
     return;
 }
 
-TrieNode & TrieNode::getNextNode(const char _letter) const {
-    const LetterKeyMap::const_iterator selectedTrieNode = nextTrieNodeMap_.find(
-            _letter);
-    std::cout << "GET NEXT NODE: " << (selectedTrieNode->second)->getLetter()
-            << std::endl;
-    if (selectedTrieNode != nextTrieNodeMap_.end()) {
-        return *(selectedTrieNode->second);
+TrieNode * const TrieNode::getNextNodePointer(const char _letter) const {
+    auto selectedTrieNodeItr = nextTrieNodeMap_.find(_letter);
+    //std::cout << "GET NEXT NODE: " << (selectedTrieNode->second)->getLetter()
+    //        << std::endl;
+    if (selectedTrieNodeItr != nextTrieNodeMap_.end()) {
+        return (selectedTrieNodeItr->second).get();
     }
-    std::cout << "HERE" << std::endl;
-    return nullTrieNode;
+    //std::cout << "HERE" << std::endl;
+    return nullptr;
 }
-**/

@@ -76,10 +76,9 @@ int main(int _argCount, char** _argVector) {
     std::cout << "Dictionary File: "
             << variablesMap["dictionaryFile"].as<String>() << std::endl;
 
-
     CharVector boggleData;
     if (!readBoggleFileIntoCharVector(variablesMap["boardFile"].as<String>(),
-        boggleData)) {
+            boggleData)) {
         return 2;
     }
 
