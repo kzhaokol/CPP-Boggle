@@ -6,16 +6,20 @@
  * Description:   Header file that contains the class used for storing a      *
  *                Boggle Board                                                *
  *****************************************************************************/
-#include <iostream>
+#include <string>
 
 #include "Trie.h"
 
+namespace {
+    typedef std::string String;
+}
+
 Trie::Trie() :
-                root_('\0', false) {
+        root_('\0', false) {
 
 }
 
-void Trie::insertWord(const std::string & _word) {
+void Trie::insertWord(const String & _word) {
     TrieNode * currentTrieNodePointer(&root_);
     for (const char & letter : _word) {
         currentTrieNodePointer->addNextLetter(letter, false);
@@ -26,7 +30,7 @@ void Trie::insertWord(const std::string & _word) {
     return;
 }
 
-bool Trie::hasWord(const std::string & _word) {
+bool Trie::hasWord(const String & _word) {
     TrieNode * currentTrieNodePointer(&root_);
 
     for (const char & letter : _word) {
@@ -37,4 +41,8 @@ bool Trie::hasWord(const std::string & _word) {
         }
     }
     return currentTrieNodePointer->isEndOfWord();
+}
+
+const TrieNode & Trie::getRootTrieNode() const {
+    return root_;
 }

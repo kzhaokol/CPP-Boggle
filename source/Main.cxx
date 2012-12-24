@@ -95,7 +95,5 @@ int main(int _argCount, char** _argVector) {
     std::cout << mainTrie.hasWord("bla") << std::endl;
     std::cout << mainTrie.hasWord("bl") << std::endl;
 
-
-
     return 0;
 }

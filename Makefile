@@ -23,13 +23,13 @@ bin/Main.o: source/Main.cxx
 	$(REGULAR_COMPILE) $^ -o $@
 	
 bin/BoggleBoard.o: source/BoggleBoard.cxx
-	$(REGULAR_COMPILE) -c $^ -o $@
+	$(REGULAR_COMPILE) $^ -o $@
 	
 bin/Trie.o: source/Trie/Trie.cxx
-	$(REGULAR_COMPILE) -c $^ -o $@
+	$(REGULAR_COMPILE) $^ -o $@
 	
 bin/TrieNode.o: source/Trie/TrieNode.cxx
-	$(REGULAR_COMPILE) -c $^ -o $@ 
+	$(REGULAR_COMPILE) $^ -o $@ 
 	
 clean:
 	rm -r bin/*

@@ -12,12 +12,14 @@
 
 #include "TrieNode.h"
 
-
 class Trie {
     public:
         Trie();
+
         void insertWord(const std::string & _word);
         bool hasWord(const std::string & _word);
+
+        TrieNode const & getRootTrieNode() const;
 
     private:
         TrieNode root_;

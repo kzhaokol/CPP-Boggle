@@ -42,7 +42,7 @@ bool TrieNode::hasNextLetter(const char _letter) const {
 
 }
 
-void TrieNode::addNextLetter(const char _letter, const char _isEndOfWord) {
+void TrieNode::addNextLetter(const char _letter, const bool _isEndOfWord) {
     nextTrieNodePointerMap_.emplace(_letter,
             std::make_unique<TrieNode>(_letter, _isEndOfWord));
     return;

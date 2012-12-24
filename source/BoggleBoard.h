@@ -16,12 +16,17 @@
 
 class BoggleBoard {
     public:
-        typedef boost::multi_array<char, 2> ArrayType;
+        typedef boost::multi_array<char, 2> MultiArrayType;
         BoggleBoard(const std::vector<char> & _boggleData);
+
+        MultiArrayType::const_reference operator[](
+                MultiArrayType::index _row) const;
+
+        std::vector<std::string> getAllWordsFromCell() const;
 
     private:
         unsigned int sideSize_;
-        ArrayType boggleBoardData_;
+        MultiArrayType boggleBoardData_;
 
         friend std::ostream & operator<<(std::ostream & _outputStream,
                 const BoggleBoard & _boggleBoard);
